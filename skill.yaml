@@ -1,0 +1,36 @@
+name: image-to-webp
+description: Convert images (PNG, JPG, GIF, BMP, TIFF) to WebP format with quality control. Supports single file and batch directory conversion.
+version: 1.0.0
+author: biu
+tags:
+  - image
+  - webp
+  - conversion
+  - optimization
+  - batch-processing
+
+# Compatible platforms
+compatible:
+  - claude-code
+  - cursor
+  - windsurf
+  - codebuddy
+
+# Dependencies
+dependencies:
+  - python: ">=3.7"
+  - pip:
+      - Pillow
+
+# Entry script
+scripts:
+  main: scripts/convert_to_webp.py
+
+# Usage examples
+examples:
+  - description: "Convert single image"
+    command: "python scripts/convert_to_webp.py image.png"
+  - description: "Batch convert directory"
+    command: "python scripts/convert_to_webp.py --batch ./images"
+  - description: "Convert with custom quality"
+    command: "python scripts/convert_to_webp.py image.jpg output.webp 90"
