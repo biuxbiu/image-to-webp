@@ -29,6 +29,27 @@ Input formats supported:
 
 Output format: WebP (lossy or lossless)
 
+## ⚠️ Important Best Practice
+
+**ALWAYS place converted WebP files in the SAME directory as the source files!**
+
+This is critical for:
+- Maintaining organized project structure
+- Easy reference management
+- Consistent asset paths
+- Simplified file management
+
+Example:
+```
+✅ CORRECT:
+/public/images/photo.png  → /public/images/photo.webp
+
+❌ INCORRECT:
+/public/images/photo.png  → /public/home/photo.webp
+```
+
+**When converting, always specify the output path to match the source file's directory**, only changing the file extension to `.webp`.
+
 ## Usage Instructions
 
 ### Single File Conversion
@@ -41,22 +62,22 @@ python scripts/convert_to_webp.py <input_file> [output_file] [quality]
 
 **Parameters:**
 - `input_file` (required): Path to the input image
-- `output_file` (optional): Path for the output WebP file. If not specified, uses the input filename with `.webp` extension
+- `output_file` (optional): Path for the output WebP file. **IMPORTANT: Should be in the same directory as input_file, only changing the extension to `.webp`**
 - `quality` (optional): Quality level 0-100 (default: 85). Higher values = better quality but larger file size
 
 **Examples:**
 ```bash
-# Convert with default settings (quality 85)
-python scripts/convert_to_webp.py image.png
+# Convert with default settings (quality 85) - output in same directory
+python scripts/convert_to_webp.py /path/to/image.png
 
-# Convert with custom output path
-python scripts/convert_to_webp.py image.jpg output/image.webp
+# Convert keeping same directory structure
+python scripts/convert_to_webp.py /public/images/photo.jpg /public/images/photo.webp
 
-# Convert with custom quality
-python scripts/convert_to_webp.py photo.png photo.webp 90
+# Convert with custom quality, same directory
+python scripts/convert_to_webp.py /assets/photo.png /assets/photo.webp 90
 
-# Convert with quality only
-python scripts/convert_to_webp.py image.png 95
+# Convert with quality only (outputs to same directory automatically)
+python scripts/convert_to_webp.py /images/banner.png 95
 ```
 
 ### Batch Directory Conversion
@@ -100,8 +121,12 @@ Recommended quality settings:
 
 1. **Identify the request**: Determine if user wants single file or batch conversion
 2. **Check dependencies**: Ensure PIL/Pillow is installed (`pip install Pillow`)
-3. **Execute conversion**: Run the appropriate command with correct parameters
-4. **Report results**: Inform user of successful conversion(s) and output location(s)
+3. **Determine output path**: **CRITICAL - Always place output in the same directory as the source file**
+   - Extract the directory path from the source file
+   - Keep the same directory, only change the file extension to `.webp`
+   - Example: `/public/images/photo.png` → `/public/images/photo.webp`
+4. **Execute conversion**: Run the appropriate command with correct parameters
+5. **Report results**: Inform user of successful conversion(s) and output location(s)
 
 ## Error Handling
 
